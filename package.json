@@ -1,0 +1,53 @@
+{
+  "name": "cmpaas",
+  "version": "1.0.0",
+  "description": "CMPaaS Backend Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CMPaaSProject/CMPaaS.git"
+  },
+  "keywords": [
+    "CMPaaS",
+    "Concep",
+    "Map",
+    "Service",
+    "Backend"
+  ],
+  "author": "Wagner de Andrade Perin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CMPaaSProject/CMPaaS/issues"
+  },
+  "homepage": "https://github.com/CMPaaSProject/CMPaaS#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.0",
+    "body-parser": "^1.18.3",
+    "consign": "^0.1.6",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.3.0",
+    "moment": "^2.22.2",
+    "mongoose": "^5.5.15",
+    "morgan": "^1.9.0",
+    "multer": "^1.3.1",
+    "natural": "^0.6.3",
+    "nodemon": "^1.18.4",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "promise": "^8.0.3",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2",
+    "socket.io": "^2.1.1",
+    "swagger-ui-express": "^3.0.10",
+    "wordnet-db": "^3.1.11"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0"
+  }
+}

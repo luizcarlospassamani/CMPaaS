@@ -1,0 +1,289 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "This is the official api documentation of the services offered by publication system of the CMPaaS Project / Backend.",
+      "version": "1.0.0",
+      "title": "CMPaaS API (PPGI/UFES)",
+      "contact": {
+        "email": "wagner.perin@ufes.br"
+      },
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT"
+      }
+    },
+    "host": "cmpaas.org",
+    "basePath": "/v1",
+    "tags": [
+      {
+        "name": "/users/",
+        "description": "Everything about Users"
+      },
+      {
+        "name": "/auth/",
+        "description": "User authentication service"
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/users": {
+        "post": {
+          "tags": [
+            "/users/"
+          ],
+          "summary": "Add a new user",
+          "description": "This will create a new user.",
+          "operationId": "createUser",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "User Object",
+              "description": "JSON Object containing all required user data to save in database",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "Creation Success.",
+              "schema": {
+                "$ref": "#/definitions/UserCreationSuccessMessage"
+              }
+            },
+            "400": {
+              "description": "Bad request from user"
+            },
+            "500": {
+              "description": "Internal server error",
+              "schema": {
+                "$ref": "#/definitions/ErrorMessage"
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "/users/"
+          ],
+          "summary": "List all users",
+          "description": "This will get a list of users.",
+          "operationId": "listUsers",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Get all registered users",
+              "schema": {
+                "$ref": "#/definitions/UserList"
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "schema": {
+                "$ref": "#/definitions/ErrorMessage"
+              }
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ]
+        }
+      },
+      "/users/me": {
+        "get": {
+          "tags": [
+            "/users/"
+          ],
+          "summary": "Get all data from logged user.",
+          "description": "This will get all userdata from the athenticated user.",
+          "operationId": "getUserData",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Get all userdata from logged user.",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            },
+            "401": {
+              "description": "Unauthorized."
+            },
+            "500": {
+              "description": "Internal server error",
+              "schema": {
+                "$ref": "#/definitions/ErrorMessage"
+              }
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ]
+        }
+      },
+      "/auth": {
+        "post": {
+          "tags": [
+            "/auth/"
+          ],
+          "summary": "Authentica user",
+          "description": "This will generate an authentication token to a user.",
+          "operationId": "authenticate",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "User credentials",
+              "description": "JSON Object containing username and password fields.",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/UserAuthentication"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Authentication Success. You have to copy the token value and past in the Authorize field.",
+              "schema": {
+                "$ref": "#/definitions/AuthenticationSuccessMessage"
+              }
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "500": {
+              "description": "Internal server error",
+              "schema": {
+                "$ref": "#/definitions/ErrorMessage"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securityDefinitions":{
+      "api_key":{
+        "type": "apiKey",
+        "name": "X-Access-Token",
+        "in": "header"
+      }
+    },
+    "definitions": {
+      "User": {
+        "type": "object",
+        "required": [
+          "firstname","surname","username","email","password"
+        ],
+        "properties": {
+            "firstname": {
+                "type": "string"
+                },
+            "surname": {
+                "type": "string"
+            },
+            "username": {
+                "type": "string"
+            },  
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "link":{
+            "type": "object",
+            "properties":{
+              "rel": {
+                "type": "string"
+              },
+              "href": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "UserAuthentication": {
+        "type": "object",
+        "required": [
+          "username","password"
+        ],
+        "properties": {
+          "username": {
+              "type": "string"
+          },  
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "UserList": {
+        "type": "array",
+        "items":{
+          "type": "object",
+          "$ref": "#/definitions/User"
+        }
+      },
+      "UserCreationSuccessMessage": {
+        "type": "object",
+        "properties": {
+          "userMessage": {
+            "type": "string"
+          },
+          "user": {
+            "type": "object",
+            "$ref": "#/definitions/User"
+          }
+        }
+      },
+      "AuthenticationSuccessMessage": {
+        "type": "object",
+        "properties": {
+          "userMessage": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "ErrorMessage": {
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "string"
+          },
+          "moreInfo": {
+            "type": "string"
+          },
+          "userMessage": {
+            "type": "string"
+          },
+          "devMessage": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
