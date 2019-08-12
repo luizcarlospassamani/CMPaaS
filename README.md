@@ -59,12 +59,12 @@ MIT
 
 Execução:
 
-*API:*
-Iniciar o BD
-Nodemon server.js
+API:
+1- Iniciar o BD
+2- Nodemon server.js
 
-*Portal do Conhecimento:*
-ng serve
+Portal do Conhecimento:
+3- ng serve
 
 **Free Software, Hell Yeah!**
 
