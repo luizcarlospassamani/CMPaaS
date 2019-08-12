@@ -171,7 +171,7 @@ const fusionConceptsSynonymous = function (mapa, res) {
 
     //promise1 tem como objetivo retornar os dados do object mapa somente quando todas as requisicoes para o modulo natural tereminarem
     let promise1 = new Promise((resolve, reject) => {
-/*
+
         mapa.nodeDataArray.forEach(function (mapaI, indexI) {
             mapa.nodeDataArray.forEach(function (mapaJ, indexJ) {
                 if (indexJ > indexI) {
@@ -207,8 +207,7 @@ const fusionConceptsSynonymous = function (mapa, res) {
                     }
                 }
             })
-        })*/
-        resolve(mapa)//apagar apenas isso para voltar a funcionar
+        })
     })
     //ANTES DE DELETAR OS ELEMENTOS COM DELETED = TRUE, TEM QUE FAZER UMA OUTRA PROMISE PARA PASSAR PELA NODEDATAARRAY EM BUSCA DE RELATION QUE NAO TENHA LINK COM NINGUEM
     promise1.then((resultado) => {
