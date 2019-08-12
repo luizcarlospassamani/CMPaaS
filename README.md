@@ -57,6 +57,14 @@ License
 
 MIT
 
+Execução:
+
+*API:*
+Iniciar o BD
+Nodemon server.js
+
+*Portal do Conhecimento:*
+ng serve
 
 **Free Software, Hell Yeah!**
 
